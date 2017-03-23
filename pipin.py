@@ -12,7 +12,7 @@
 
 import click
 
-import delegator
+from sh import pip as sh_pip
 
 
 @click.group()
@@ -37,36 +37,43 @@ def install(packagename, save, save_dev, save_test, filename):
     Install the package via pip, pin the package only to requirements file.
     Use option to decide which file the package will be pinned to.
     """
-    delegator.run('pip install ' + packagename)
     print('Installing ', packagename)
+    print(sh_pip.install(packagename))
     if not filename:
         filename = get_filename(save, save_dev, save_test)
-    update_requirements(packagename, filename)
+    add_requirements(packagename, filename)
 
 
 @pipin.command()
 @click.argument('packagename')
 @click.argument('filename', required=False)
 def remove(packagename, filename):
-    delegator.run('pip uninstall ' + packagename)
+    print(sh_pip.uninstall(packagename, _fg=True))
     if not filename:
         filename = get_filename()
-    update_requirements(packagename, filename, True)
+    remove_requirements(packagename, filename)
 
 
-def update_requirements(packagename, filename, uninstall=False):
-    output = delegator.run('pip freeze').out
-
+def add_requirements(packagename, filename):
+    # output = delegator.run('pip freeze').out
+    output = sh_pip("freeze", _out=True)
     for req in output.split('\n'):
         if not req:
             continue
-        if packagename in req and not uninstall:
+        if packagename in req:
             with open(filename, 'ab+') as f:
                 f.write(req.encode('utf-8'))
-        if uninstall and packagename not in req:
-            with open(filename, 'wb') as f:
-                f.write(req.encode('utf-8'))
 
+    print('Updated', str(filename) + '!')
+
+
+def remove_requirements(packagename, filename):
+    with open(filename, 'wb+') as f:
+        lines = f.readlines()
+        f.seek(0)
+        for line in lines:
+            if packagename not in line:
+                f.write(line)
     print('Updated', str(filename) + '!')
 
 
