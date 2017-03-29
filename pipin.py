@@ -12,7 +12,9 @@
 
 import click
 
+from sh import mv as sh_mv
 from sh import pip as sh_pip
+from sh import rm as sh_rm
 
 
 @click.group()
@@ -48,16 +50,16 @@ def install(packagename, save, save_dev, save_test, filename):
 @click.argument('packagename')
 @click.argument('filename', required=False)
 def remove(packagename, filename):
-    print(sh_pip.uninstall(packagename, _fg=True))
+    print(sh_pip.uninstall(packagename, "-y"))
     if not filename:
         filename = get_filename()
     remove_requirements(packagename, filename)
 
 
 def add_requirements(packagename, filename):
-    # output = delegator.run('pip freeze').out
-    output = sh_pip("freeze", _out=True)
-    for req in output.split('\n'):
+    output = sh_pip.freeze
+    packages = output.split('\n')
+    for req in packages:
         if not req:
             continue
         if packagename in req:
@@ -68,12 +70,13 @@ def add_requirements(packagename, filename):
 
 
 def remove_requirements(packagename, filename):
-    with open(filename, 'wb+') as f:
-        lines = f.readlines()
-        f.seek(0)
-        for line in lines:
-            if packagename not in line:
-                f.write(line)
+    with open(filename, 'rb+') as f0:
+        for line in f0.readlines():
+            if packagename not in str(line):
+                with open(filename + '.tmp', 'wb+') as f1:
+                    f1.write(line)
+    sh_rm(filename, "-f")
+    sh_mv(filename + '.tmp', filename)
     print('Updated', str(filename) + '!')
 
 
