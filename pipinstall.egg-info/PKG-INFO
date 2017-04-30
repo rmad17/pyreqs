@@ -1,8 +1,8 @@
 Metadata-Version: 1.0
 Name: pipinstall
-Version: 0.0.1
+Version: 0.0.2
 Summary: Better manage python requirements file
-Home-page: https://github.com/rmad17/pipin
+Home-page: https://github.com/rmad17/pipinstall
 Author: Sourav Basu
 Author-email: souravbasu17@gmail.com
 License: UNKNOWN

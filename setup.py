@@ -9,11 +9,11 @@ from setuptools import setup
 
 setup(
     name='pipinstall',
-    version='0.0.1',
+    version='0.0.2',
     description='Better manage python requirements file',
     author='Sourav Basu',
     author_email='souravbasu17@gmail.com',
-    url='https://github.com/rmad17/pipin',
+    url='https://github.com/rmad17/pipinstall',
     py_modules=['pipinstall'],
     install_requires=[
         'click', 'sh'
