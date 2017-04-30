@@ -8,18 +8,18 @@
 from setuptools import setup
 
 setup(
-    name='pipin',
+    name='pippin',
     version='0.0.1',
     description='Better manage python requirements file',
     author='Sourav Basu',
     author_email='souravbasu17@gmail.com',
     url='https://github.com/rmad17/pipin',
-    py_modules=['pipin'],
+    py_modules=['pippin'],
     install_requires=[
         'click', 'sh'
     ],
     entry_points='''
         [console_scripts]
-        pipin=pipin:pipin
+        pippin=pippin:pippin
     ''',
 )

@@ -1,0 +1,8 @@
+pipin.py
+setup.py
+pipin.egg-info/PKG-INFO
+pipin.egg-info/SOURCES.txt
+pipin.egg-info/dependency_links.txt
+pipin.egg-info/entry_points.txt
+pipin.egg-info/requires.txt
+pipin.egg-info/top_level.txt
