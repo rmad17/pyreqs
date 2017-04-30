@@ -1,4 +1,0 @@
-
-        [console_scripts]
-        pipin=pipin:pipin
-    

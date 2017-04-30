@@ -20,14 +20,14 @@ from sh import rm as sh_rm
 
 @click.group()
 @click.version_option()
-def pippin():
+def pipinstall():
     """
-    Entry point for pippin
+    Entry point for pipinstall
     """
     pass
 
 
-@pippin.command()
+@pipinstall.command()
 @click.argument('packagename')
 @click.option('--save', is_flag=True, help='pin package to requirements')
 @click.option('--save-dev', is_flag=True,
@@ -50,7 +50,7 @@ def install(packagename, save, save_dev, save_test, filename):
         print('Package already pinned in ', filename)
 
 
-@pippin.command()
+@pipinstall.command()
 @click.argument('packagename')
 @click.argument('filename', required=False)
 def remove(packagename, filename):
@@ -116,4 +116,4 @@ def order_requirements(filename):
 
 
 if __name__ == '__main__':
-    pippin()
+    pipinstall()
