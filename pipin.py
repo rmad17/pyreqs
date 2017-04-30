@@ -54,6 +54,9 @@ def install(packagename, save, save_dev, save_test, filename):
 @click.argument('packagename')
 @click.argument('filename', required=False)
 def remove(packagename, filename):
+    """
+    Uninstall the package and remove it from requirements file.
+    """
     print(sh_pip.uninstall(packagename, "-y"))
     if not filename:
         filename = get_filename()
@@ -63,12 +66,15 @@ def remove(packagename, filename):
 def add_requirements(packagename, filename):
     output = sh_pip.freeze
     packages = output.split('\n')
-    with open(filename, 'rb+') as f0:
-        current_requirements = f0.readlines()
-    versioned_packagename = sh_grep(
-        sh_pip.freeze(_iter=True), packagename, _iter=True)
-    byted_packagename = str(versioned_packagename).encode('utf-8')
-    assert byted_packagename not in current_requirements
+    try:
+        with open(filename, 'rb+') as f0:
+            current_requirements = f0.readlines()
+        versioned_packagename = sh_grep(
+            sh_pip.freeze(_iter=True), packagename, _iter=True)
+        byted_packagename = str(versioned_packagename).encode('utf-8')
+        assert byted_packagename not in current_requirements
+    except FileNotFoundError:
+        pass
     for req in packages:
         if not req:
             continue
