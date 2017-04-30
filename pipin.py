@@ -12,6 +12,7 @@
 
 import click
 
+from sh import grep as sh_grep
 from sh import mv as sh_mv
 from sh import pip as sh_pip
 from sh import rm as sh_rm
@@ -43,7 +44,10 @@ def install(packagename, save, save_dev, save_test, filename):
     print(sh_pip.install(packagename))
     if not filename:
         filename = get_filename(save, save_dev, save_test)
-    add_requirements(packagename, filename)
+    try:
+        add_requirements(packagename, filename)
+    except AssertionError:
+        print('Package already pinned in ', filename)
 
 
 @pipin.command()
@@ -59,13 +63,19 @@ def remove(packagename, filename):
 def add_requirements(packagename, filename):
     output = sh_pip.freeze
     packages = output.split('\n')
+    with open(filename, 'rb+') as f0:
+        current_requirements = f0.readlines()
+    versioned_packagename = sh_grep(
+        sh_pip.freeze(_iter=True), packagename, _iter=True)
+    byted_packagename = str(versioned_packagename).encode('utf-8')
+    assert byted_packagename not in current_requirements
     for req in packages:
         if not req:
             continue
         if packagename in req:
             with open(filename, 'ab+') as f:
                 f.write(req.encode('utf-8'))
-
+    order_requirements(filename)
     print('Updated', str(filename) + '!')
 
 
@@ -86,6 +96,17 @@ def get_filename(save=False, save_dev=False, save_test=False):
     if save_test:
         return 'test-requirements.txt'
     return 'requirements.txt'
+
+
+def order_requirements(filename):
+    with open(filename, 'rb+') as f0:
+        packages = f0.readlines()
+        packages.sort()
+    with open(filename + '.tmp', 'ab+') as f1:
+        for package in packages:
+            f1.write(package)
+    sh_rm(filename, "-f")
+    sh_mv(filename + '.tmp', filename)
 
 
 if __name__ == '__main__':
