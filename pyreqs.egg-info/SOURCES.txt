@@ -1,0 +1,8 @@
+pyreqs.py
+setup.py
+pyreqs.egg-info/PKG-INFO
+pyreqs.egg-info/SOURCES.txt
+pyreqs.egg-info/dependency_links.txt
+pyreqs.egg-info/entry_points.txt
+pyreqs.egg-info/requires.txt
+pyreqs.egg-info/top_level.txt
