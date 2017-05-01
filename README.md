@@ -23,14 +23,14 @@ This has not been tested in python2. I do not want to test in python2 either sin
 
 ## Usage
 Install
-`pyreqs install django`
-`pyreqs install django-extensions --save-dev`
-`pyreqs install coverage --save-test my-test.txt`
+`pyreqs install django` <br>
+`pyreqs install django-extensions --save-dev`<br>
+`pyreqs install coverage --save-test my-test.txt`<br>
 
 Remove
-`pyreqs remove django`
-`pyreqs remove django-extensions --save-dev`
-`pyreqs remove coverage --save-test my-test.txt`
+`pyreqs remove django`<br>
+`pyreqs remove django-extensions --save-dev`<br>
+`pyreqs remove coverage --save-test my-test.txt`<br>
 
 ```
 Usage: pyreqs [OPTIONS] COMMAND [ARGS]...
