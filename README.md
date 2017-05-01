@@ -15,3 +15,19 @@ I did a lot of research and could not find anything decent and decided to write 
 
 Lets say you do `pyreqs install django`. It will create a requirements.txt file if it does not exist and pin only the django package and none of its dependencies. This makes it easy to know which packages I am using later. You do `pyreqs remove django` and requirements.txt is updated as well. 
 Its not done yet. `pyreqs install django-extensions --save-dev` and you shall have this updated to a dev-requirements.txt. `--save-test` puts it in a test-requirements.txt. You can also pass a filename to save it in a different file. 
+
+
+
+```
+Usage: pyreqs [OPTIONS] COMMAND [ARGS]...
+
+  Entry point for pyreqs
+
+Options:
+  --version  Show the version and exit.
+  --help     Show this message and exit.
+
+Commands:
+  install  Install the package via pip, pin the package...
+  remove   Uninstall the package and remove it from...
+  ```
