@@ -22,12 +22,12 @@ Its not done yet. `pyreqs install django-extensions --save-dev` and you shall ha
 This has not been tested in python2. I do not want to test in python2 either since I strongly belive we should move towards python3. However if their is some bug you can raise an issue or send a PR. If possible I will try to resolve it.
 
 ## Usage
-Install
+Install<br>
 `pyreqs install django` <br>
 `pyreqs install django-extensions --save-dev`<br>
 `pyreqs install coverage --save-test my-test.txt`<br>
 
-Remove
+Remove<br>
 `pyreqs remove django`<br>
 `pyreqs remove django-extensions --save-dev`<br>
 `pyreqs remove coverage --save-test my-test.txt`<br>
