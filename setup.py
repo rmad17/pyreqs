@@ -9,7 +9,7 @@ from setuptools import setup
 
 setup(
     name='pyreqs',
-    version='0.0.1',
+    version='0.1.1',
     description='Better manage python requirements file',
     author='Sourav Basu',
     author_email='souravbasu17@gmail.com',
