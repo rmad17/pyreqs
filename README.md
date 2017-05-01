@@ -1,4 +1,4 @@
-# pyreqs
+# PyReqs
 Better manage requirements.txt
 
 Recently there was a really nice dependency management library released by Kenneth Reitz called pipenv. I was very excited and still am about it(The very first issue was raised by me regarding managing dependencies of libraries I install). However the problem started because of pipfile writing this in their README. `WARNING: This project is under active design and development. Nothing is set in stone at this point of time.`. I knew I could not use pipenv in production right now.
