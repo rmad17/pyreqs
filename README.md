@@ -30,7 +30,7 @@ Install<br>
 Remove<br>
 `pyreqs remove django`<br>
 `pyreqs remove django-extensions --save-dev`<br>
-`pyreqs remove coverage --save-test my-test.txt`<br>
+`pyreqs remove coverage my-test.txt`<br>
 
 ```
 Usage: pyreqs [OPTIONS] COMMAND [ARGS]...
