@@ -52,14 +52,19 @@ def install(packagename, save, save_dev, save_test, filename):
 
 @pyreqs.command()
 @click.argument('packagename')
+@click.option('--save', is_flag=True, help='remove package from requirements')
+@click.option('--save-dev', is_flag=True,
+              help='remove package from dev-requirements')
+@click.option('--save-test', is_flag=True,
+              help='remove package from test-requirements')
 @click.argument('filename', required=False)
-def remove(packagename, filename):
+def remove(packagename, save, save_dev, save_test, filename):
     """
     Uninstall the package and remove it from requirements file.
     """
     print(sh_pip.uninstall(packagename, "-y"))
     if not filename:
-        filename = get_filename()
+        filename = get_filename(save, save_dev, save_test)
     remove_requirements(packagename, filename)
 
 
