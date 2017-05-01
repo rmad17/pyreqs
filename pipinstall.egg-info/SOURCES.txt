@@ -1,8 +1,0 @@
-pipinstall.py
-setup.py
-pipinstall.egg-info/PKG-INFO
-pipinstall.egg-info/SOURCES.txt
-pipinstall.egg-info/dependency_links.txt
-pipinstall.egg-info/entry_points.txt
-pipinstall.egg-info/requires.txt
-pipinstall.egg-info/top_level.txt
